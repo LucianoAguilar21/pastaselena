@@ -13,8 +13,10 @@ class Order extends Model
     protected $fillable = [
         'created_by',
         'customer_id',
-        'order_date',
         'status',
+        'delivery_date',
+        'paid',
+        'with_delivery',
         'total_amount',
     ];
 

@@ -18,7 +18,7 @@ class OrderSeeder extends Seeder
             'customer_id' => 1,
             'total_amount' => 3000.00,
             'status'=> 'new',
-            'deliver_date' => now()->addDays(2),
+            'delivery_date' => now()->addDays(2),
             'paid' => false,
             'with_delivery' => true,
             'total_amount' => 3000.00,

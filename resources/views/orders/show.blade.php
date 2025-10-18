@@ -14,7 +14,7 @@
                     <p>Created by: {{ $order->user->name }}</p>
                     <p>Total Amount: {{ $order->total_amount }}</p>
                     <p>Status: {{ $order->status }}</p>
-                    <p>Delivery Date: {{ $order->deliver_date }}</p>
+                    <p>Delivery Date: {{ $order->delivery_date }}</p>
                     <p>Paid: {{ $order->paid ? 'Yes' : 'No' }}</p>
                     <p>With Delivery: {{ $order->with_delivery ? 'Yes' : 'No' }}</p>
 
