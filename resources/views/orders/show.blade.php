@@ -25,6 +25,10 @@
                         @endforeach
                     </ul>
 
+                  
+                    <button>
+                        <a href="{{route('orders.edit', $order)}}" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" >Edit</a>                    
+                    </button>
                 </div>
             </div>
         </div>

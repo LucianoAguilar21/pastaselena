@@ -25,6 +25,9 @@
                                         Customer
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Delivery Date
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Total Amount
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -44,6 +47,9 @@
                                         </th>
                                         <td class="px-6 py-4">
                                             {{ $order->customer->name }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $order->delivery_date }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $order->total_amount }} 

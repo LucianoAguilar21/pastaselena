@@ -107,12 +107,16 @@
 
                         <!-- Submit -->
                         <div class="flex justify-end mt-6">
-                            <x-primary-button>{{ __('Create Order') }}</x-primary-button>
+                            <x-primary-button type="button" class="mt-4" @click="submitForm">{{ __('Create Order') }}</x-primary-button>
+                        </div>
+                        <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                            Falta agregar productos antes de crear el pedido.
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+       
 
         <!-- Product Search Modal -->
         <div x-show="openModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" x-cloak>
@@ -165,6 +169,15 @@
                     this.openModal = false;
                     this.searchQuery = '';
                 },
+                 submitForm(event) {
+                        if (this.selectedProducts.length === 0) {
+                            this.showWarning = true;
+                            setTimeout(() => this.showWarning = false, 3000);
+                            return;
+                        }
+                        // Si hay productos se envia el formulario
+                        document.getElementById('orderForm').submit();
+                    },
 
                 increaseQty(index) {
                     this.selectedProducts[index].quantity++;
@@ -194,6 +207,8 @@
                 formatCurrency(value) {
                     return '$' + value.toFixed(2);
                 }
+
+
             }
         }
     </script>

@@ -89,7 +89,13 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $customers = Customer::all();
+        $products = Product::all();
+
+        // Cargar los items actuales del pedido
+        $order->load('items.product');
+
+        return view('orders.edit', compact('order', 'customers', 'products'));
     }
 
     /**
@@ -97,7 +103,44 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $validated = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'delivery_date' => 'required|date',
+            'paid' => 'nullable|boolean',
+            'with_delivery' => 'nullable|boolean',
+            'products' => 'required|array|min:1',
+            'quantities' => 'required|array',
+        ]);
+
+        // Actualizar los datos del pedido
+        $order->update([
+            'customer_id' => $validated['customer_id'],
+            'delivery_date' => $validated['delivery_date'],
+            'paid' => $request->has('paid'),
+            'with_delivery' => $request->has('with_delivery'),
+        ]);
+
+        // Borrar los items actuales
+        $order->items()->delete();
+
+        $total = 0;
+        foreach ($validated['products'] as $index => $productId) {
+            $product = Product::findOrFail($productId);
+            $quantity = $validated['quantities'][$index];
+            $subTotal = $product->price * $quantity;
+
+            $order->items()->create([
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                'sub_total' => $subTotal,
+            ]);
+
+            $total += $subTotal;
+        }
+
+        $order->update(['total_amount' => $total]);
+
+        return redirect()->route('orders.show',$order->id)->with('success', 'Pedido actualizado correctamente.');
     }
 
     /**
