@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
-                    <form method="POST" action="{{ route('orders.store') }}">
+                    <form id="editOrderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
 
                         <!-- Customer -->
@@ -109,7 +109,7 @@
                         <div class="flex justify-end mt-6">
                             <x-primary-button type="button" class="mt-4" @click="submitForm">{{ __('Create Order') }}</x-primary-button>
                         </div>
-                        <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                        <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">                
                             Falta agregar productos antes de crear el pedido.
                         </div>
                     </form>
@@ -150,6 +150,7 @@
                 products: @json($products), // lista de productos disponibles
                 selectedProducts: [],
                 searchQuery: '',
+                showWarning: false,
 
                 get filteredProducts() {
                     if (this.searchQuery === '') return this.products;
