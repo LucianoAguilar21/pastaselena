@@ -130,7 +130,7 @@ class OrderController extends Controller
             $subTotal = $product->price * $quantity;
 
             $order->items()->create([
-                'product_id' => $productId,
+                'product_id' => $product->id,
                 'quantity' => $quantity,
                 'sub_total' => $subTotal,
             ]);

@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <x-primary-button type="button" @click="submitForm">Update Order</x-primary-button>
+                        <x-primary-button type="submit" @click="submitEditForm">Update Order</x-primary-button>
                     </div>
                      <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">                
                             Falta agregar productos antes de actualizar el pedido.
@@ -138,8 +138,8 @@
                 selectedProducts: existingItems,
                 searchQuery: '',
                 showModal: false,
-                paid: {{$order->paid ? 'true' : 'false'}}, // estado actual del paid del pedido
-                with_delivery: {{$order->with_delivery ? 'true': ' false'}}, // estado actual del with_delivery del pedido
+                paid: {{$order->paid}}, // estado actual del paid del pedido
+                with_delivery: {{$order->with_delivery}}, // estado actual del with_delivery del pedido
                 showWarning: false,
 
                 get total() {
@@ -161,14 +161,14 @@
                     this.showModal = false;
                     this.searchQuery = '';
                 },
-                 submitForm(event) {
+                 submitEditForm(event) {
                         if (this.selectedProducts.length === 0) {
                             this.showWarning = true;
                             setTimeout(() => this.showWarning = false, 3000);
                             return;
                         }
                         // Si hay productos se envia el formulario
-                        document.getElementById('editOrderForm').submit();
+                        // document.getElementById('editOrderForm').submit();
                     },
 
                 removeProduct(index) {
