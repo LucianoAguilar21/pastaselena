@@ -16,7 +16,7 @@
                         <!-- Customer -->
                         <div class="mb-4">
                             <x-input-label for="customer_id" :value="__('Customer')" />
-                            <select id="customer_id" class="block mt-1 w-full dark:bg-gray-800" name="customer_id" required>
+                            <select id="customer_id" class=" mt-1 w-full dark:bg-gray-800" name="customer_id" required>
                                 <option value="" disabled selected>Select a customer</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->name }}</option>
