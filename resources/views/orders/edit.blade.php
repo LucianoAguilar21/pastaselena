@@ -96,9 +96,9 @@
                     <div class="flex justify-end">
                         <x-primary-button type="submit" @click="submitEditForm">Update Order</x-primary-button>
                     </div>
-                     <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">                
-                            Falta agregar productos antes de actualizar el pedido.
-                        </div>
+                    <div x-show="showWarning" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">                
+                        Falta agregar productos antes de actualizar el pedido.
+                    </div>
                 </form>
             </div>
         </div>
@@ -162,9 +162,10 @@
                     this.searchQuery = '';
                 },
                  submitEditForm(event) {
-                        if (this.selectedProducts.length === 0) {
+                     if (this.selectedProducts.length === 0) {
                             this.showWarning = true;
                             setTimeout(() => this.showWarning = false, 3000);
+                            event.preventDefault();
                             return;
                         }
                         // Si hay productos se envia el formulario

@@ -171,11 +171,12 @@
                     this.openModal = false;
                     this.searchQuery = '';
                 },
-                 submitForm(event) {
-                        
+                 submitForm(event) {                    
+                        //event.preventDefault();
                         if (this.selectedProducts.length === 0) {
                             this.showWarning = true;
                             setTimeout(() => this.showWarning = false, 3000);
+                            event.preventDefault();
                             return;
                         }
                         // Si hay productos se envia el formulario

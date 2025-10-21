@@ -1,9 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Order: ') . $order->id }}
-            </h2>
+        <div class="flex justify-between items-center">            
+            <div class="flex items-center">
+                    <a href="{{ url()->previous() }}" class="mx-6 text-black p-2 rounded dark:text-white hover:underline font-bold">{{__('Back')}}</a> 
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {{ __('Order: ') . $order->id }}       
+                    </h2>
+            </div>
             <button class="">
                 <a href="{{route('orders.edit', $order)}}" class="mt-6 px-4 py-2 bg-blue-800 text-white rounded hover:bg-blue-600" >Edit</a>                    
             </button>
@@ -16,20 +19,66 @@
                   
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
-                    <p>Customer: {{ $order->customer->name }}</p>
-                    <p>Created by: {{ $order->user->name }}</p>
-                    <p>Total Amount: {{ $order->total_amount }}</p>
-                    <p>Status: {{ $order->status }}</p>
-                    <p>Delivery Date: {{ $order->delivery_date }}</p>
-                    <p>Paid: {{ $order->paid ? 'Yes' : 'No' }}</p>
-                    <p>With Delivery: {{ $order->with_delivery ? 'Yes' : 'No' }}</p>
+                    <div class="lg:flex lg:justify-between lg:items-center">
+                        <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1">Customer:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->customer->name }}</span></p>
+                        <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Created by:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->user->name }} </span></p>
+                    </div>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Total Amount:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->total_amount }}</span></p>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Status:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->status }}</span></p>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Date:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->delivery_date }}</span></p>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Paid:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->paid ? 'Yes' : 'No' }}</span></p>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> With Delivery: </strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->with_delivery ? 'Yes' : 'No' }}</span></p>
 
                     <h3 class="mt-4 font-semibold text-lg">Items:</h3>
-                    <ul class="list-disc list-inside">
-                        @foreach ($order->items as $item)
-                            <li>{{ $item->product->name }} - Quantity: {{ $item->quantity }} - Price: {{ $item->sub_total }}</li>
-                        @endforeach
-                    </ul>
+
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Product name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Unit price
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Quantity
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Subtotal
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                @if ($order->items->isEmpty())
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                        <td colspan="4" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                                            No items found for this order.
+                                        </td>
+                                    </tr>
+                                @endif
+                                @foreach ($order->items as $item)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $item->product->name }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        ${{ number_format($item->product->price, 2) }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $item->quantity }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        ${{ number_format($item->sub_total, 2) }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
 
                   
                     
