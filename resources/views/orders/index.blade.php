@@ -25,6 +25,9 @@
                                         Customer
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Created At
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Delivery Date
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -49,7 +52,10 @@
                                             {{ $order->customer->name }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $order->delivery_date }}
+                                            {{ Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i ') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                             {{Carbon\Carbon::parse($order->delivery_date)->format('d/m/Y H:i ')}}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $order->total_amount }} 

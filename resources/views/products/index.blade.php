@@ -36,7 +36,7 @@
                             <tbody>
                                 @foreach ($products as $product)
                                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200
-                                 @if(session('new_product_id') == $product->id)
+                                    @if(session('new_product_id') == $product->id)
                                         animate-fadeBackground
                                     @endif">
                             

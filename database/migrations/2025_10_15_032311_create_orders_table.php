@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['new', 'preparing', 'ready', 'delivered', 'cancelled'])->default('new');
-            $table->date('delivery_date');
+            $table->dateTime('delivery_date');
             $table->boolean('paid')->default(false);
             $table->boolean('with_delivery')->default(false);
             $table->decimal('total_amount', 10, 2)->default(0);
