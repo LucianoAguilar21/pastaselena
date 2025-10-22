@@ -28,7 +28,7 @@
                         <div class="mb-4">
                             <x-input-label for="delivery_date" :value="__('Delivery Date')" />
                             <x-text-input id="delivery_date" class="block mt-1 w-full dark:bg-gray-800"
-                                type="date" name="delivery_date" required />
+                                type="datetime-local" name="delivery_date" required />
                            
                           
                         </div>

@@ -12,7 +12,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('customers.index')->with('customers', Customer::all());
     }
 
     /**
@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -28,7 +28,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:500',
+        ]);
+
+
+        $customer = Customer::create($validated);
+
+        return redirect()->route('customers')->with('success', 'Customer created successfully.')->with('new_customer_id', $customer->id);
     }
 
     /**

@@ -35,7 +35,7 @@
                     <!-- Fecha de entrega -->
                     <div class="mb-4">
                         <x-input-label for="delivery_date" :value="__('Delivery Date')" />
-                        <x-text-input id="delivery_date" type="date" name="delivery_date"
+                        <x-text-input id="delivery_date" type="datetime-local" name="delivery_date"
                             class="block mt-1 w-full dark:bg-gray-800"
                             value="{{ $order->delivery_date }}" required />
                     </div>

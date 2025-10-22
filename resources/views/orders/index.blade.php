@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">             
 
                     <a href="{{route('orders.create')}}" class="m-2 text-blue-500 hover:text-blue-700 font-semibold bg-gray-100 dark:bg-gray-700 rounded px-4 py-2">                
-                        Add new order                
+                        Add new order (F9)
                     </a>
 
                     <div class="m-4 relative overflow-x-auto">
@@ -79,4 +79,18 @@
             </div>
         </div>
     </div>
+    <script>
+        function onKeyDownHandler(event) {
+
+            let codigo = event.which || event.keyCode;
+
+            if(codigo ===  120){
+                location.href ="/orders/create";
+            }
+    
+
+            
+        }
+        document.addEventListener('keydown', onKeyDownHandler);
+    </script>
 </x-app-layout>
