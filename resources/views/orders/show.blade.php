@@ -24,10 +24,10 @@
                         <p class=""> <strong class="bg-gray-800 text-white rounded p-1"> Created by:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->user->name }} </span></p>
                     </div>
                     @if ($order->with_delivery)
-                        <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Address:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->customer->address }}</span></p>                                            
+                        <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Address:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->customer->address ? $order->customer->address : 'Sin asignar'  }}</span></p>                                            
                         
                     @endif
-                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Total Amount:</strong> <span class="bg-gray-100 rounded p-1 border">${{ $order->total_amount }}</span></p>
+                    
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Status:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->status }}</span></p>
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Date:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->delivery_date }}</span></p>
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Paid:</strong> 
@@ -40,6 +40,7 @@
                             {{ $order->with_delivery ? 'Yes' : 'No' }}
                         </span>
                     </p>
+                    <p class=" mx-2 text-lg "> <strong class="bg-gray-800 text-white rounded p-1"> Total Amount:</strong> <span class="bg-gray-100 rounded p-1 border">${{ $order->total_amount }}</span></p>
 
                     <h3 class="mt-4 font-semibold text-lg">Items:</h3>
 
