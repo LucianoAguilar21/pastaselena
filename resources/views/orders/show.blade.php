@@ -21,22 +21,48 @@
                     
                     <div class="lg:flex lg:justify-between lg:items-center">
                         <p class="mx-2"> <strong class="bg-gray-800 text-white rounded p-1">Customer:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->customer->name }}</span></p>
-                        <p class=""> <strong class="bg-gray-800 text-white rounded p-1"> Created by:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->user->name }} </span></p>
+                        <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Created by:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->user->name }} </span></p>
                     </div>
                     @if ($order->with_delivery)
                         <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Address:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->customer->address ? $order->customer->address : 'Sin asignar'  }}</span></p>                                            
                         
                     @endif
                     
-                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Status:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->status }}</span></p>
+                    <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Status:</strong>
+                        @if ($order->status == 'new')
+                            <span class="bg-blue-400 rounded p-1 border font-semibold text-white">
+                                {{ $order->status }}
+                            </span>    
+                        @endif
+                        @if ($order->status == 'preparing')
+                            <span class="bg-yellow-400 rounded p-1 border font-semibold text-white">
+                                {{ $order->status }}
+                            </span>    
+                        @endif
+                        @if ($order->status == 'completed')
+                            <span class="bg-green-400 rounded p-1 border font-semibold text-white">
+                                {{ $order->status }}
+                            </span>    
+                        @endif
+                        @if ($order->status == 'cancelled')
+                            <span class="bg-red-400 rounded p-1 border font-semibold text-white">
+                                {{ $order->status }}
+                            </span>    
+                        @endif
+                         @if ($order->status == 'ready')
+                            <span class="bg-orange-400 rounded p-1 border font-semibold text-white">
+                                {{ $order->status }}
+                            </span>    
+                        @endif
+                    </p>
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Delivery Date:</strong> <span class="bg-gray-100 rounded p-1 border">{{ $order->delivery_date }}</span></p>
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> Paid:</strong> 
-                        <span class="{{ $order->paid ? 'bg-green-300 rounded p-1 border' : 'bg-red-300 rounded p-1 border' }} ">
+                        <span class="{{ $order->paid ? 'bg-green-300 rounded p-1 border font-semibold text-gray-700' : 'bg-red-300 rounded p-1 border font-bold text-gray-700' }} ">
                             {{ $order->paid ? 'Yes' : 'No' }}
                         </span>
                     </p>
                     <p class="m-2"> <strong class="bg-gray-800 text-white rounded p-1"> With Delivery: </strong>
-                         <span class="{{ $order->with_delivery ? 'bg-green-300 rounded p-1 border' : 'bg-red-300 rounded p-1 border' }}">
+                         <span class="{{ $order->with_delivery ? 'bg-green-300 rounded p-1 border font-bold text-gray-700' : 'bg-red-300 rounded p-1 border font-bold text-gray-700 ' }}">
                             {{ $order->with_delivery ? 'Yes' : 'No' }}
                         </span>
                     </p>

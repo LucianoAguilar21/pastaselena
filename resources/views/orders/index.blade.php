@@ -61,7 +61,31 @@
                                             {{ $order->total_amount }} 
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $order->status }} 
+                                            @if ($order->status == 'new')
+                                                <span class="bg-blue-400 rounded p-1 border font-semibold text-white">
+                                                    {{ $order->status }}
+                                                </span>    
+                                            @endif
+                                            @if ($order->status == 'preparing')
+                                                <span class="bg-yellow-400 rounded p-1 border font-semibold text-white">
+                                                    {{ $order->status }}
+                                                </span>    
+                                            @endif
+                                            @if ($order->status == 'completed')
+                                                <span class="bg-green-400 rounded p-1 border font-semibold text-white">
+                                                    {{ $order->status }}
+                                                </span>    
+                                            @endif
+                                            @if ($order->status == 'cancelled')
+                                                <span class="bg-red-400 rounded p-1 border font-semibold text-white">
+                                                    {{ $order->status }}
+                                                </span>    
+                                            @endif
+                                            @if ($order->status == 'ready')
+                                                <span class="bg-orange-400 rounded p-1 border font-semibold text-white">
+                                                    {{ $order->status }}
+                                                </span>    
+                                            @endif  
                                         </td>
                                         <td class="px-6 py-4">
                                             <a href="{{route('orders.show',$order)}}">Ver</a>
